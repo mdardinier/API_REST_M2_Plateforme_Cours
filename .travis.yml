@@ -6,9 +6,6 @@ jdk: oraclejdk8
 before_install:
   - chmod +x mvnw
   
-build:
-    - script: mvn clean package -DskipTests
-    
 
 deploy:
   provider: heroku
