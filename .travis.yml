@@ -1,5 +1,10 @@
 language: java
-jdk: oraclejdk8
+
+before_install: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+build:
+    - script: mvn clean package -DskipTests
+    
 
 deploy:
   provider: heroku
