@@ -74,7 +74,6 @@ public class UtilisateurController {
 			HttpSession httpSession) {
 		Utilisateur u = ur.findByEmail(email);
 		if (u == null) {
-			modelMap.put("erreur", true);
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("erreur", true);
 			mav.setViewName("redirect:/connexion");
@@ -182,6 +181,58 @@ public class UtilisateurController {
 	/*
 	 * Acheter un cours
 	 */
+	@GetMapping("/cours/{id}/achat")
+	public String acheterCours(@RequestParam("erreurTransaction") Optional<String> erreurTransaction,
+			@PathVariable Long id, ModelMap modelMap, HttpSession httpSession) {
+		if (erreurTransaction.isPresent()) {
+			modelMap.put("erreurTransaction", erreurTransaction);
+		}
+		Object user = httpSession.getAttribute("id");
+		if (user instanceof Long) {
+			Long userId = (Long) user;
+			modelMap.put("session", true);
+			Cours c = cr.findById(id).get();
+			Utilisateur u = ur.findById(userId).get();
+			if (u.getCours().contains(c)) {
+				modelMap.put("contenuDejaAchete", true);
+			} else {
+				modelMap.put("titre", c.getTitre());
+				modelMap.put("prix", c.getPrix());
+			}
+		} else {
+			modelMap.put("accesRefuse", true);
+		}
+		return "achat";
+	}
+
+	/*
+	 * Valider achat d'un cours
+	 */
+	@PostMapping("/cours/{idCours}/valide")
+	public ModelAndView validerAchatCours(@RequestParam("numeroCarte") String numeroCarte,
+			@RequestParam("dateExpiration") String dateExpiration, @RequestParam("codeCarte") String codeCarte,
+			@PathVariable Long idCours, ModelMap modelMap, HttpSession httpSession) {
+		Object user = httpSession.getAttribute("id");
+		if (user instanceof Long) {
+			Long userId = (Long) user;
+			modelMap.put("session", true);
+			if (VerificationCarteBancaire.transactionBancaireValide(numeroCarte, dateExpiration, codeCarte)) {
+				Utilisateur u = ur.findById(userId).get();
+				Cours c = cr.findById(idCours).get();
+				u.getCours().add(c);
+				ur.save(u);
+				return new ModelAndView("redirect:/bibliotheque");
+			} else {
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("erreurTransaction", true);
+				mav.setViewName("redirect:/cours/" + idCours + "/achat");
+				return mav;
+			}
+
+		}
+		modelMap.put("accesRefuse", true);
+		return new ModelAndView("cours");
+	}
 
 	/*
 	 * Voir les cours achetés
