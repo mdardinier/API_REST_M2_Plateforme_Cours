@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Accueil</title>
+<title>Projet API REST - Utilisateur</title>
 </head>
 <body>
 	<c:if test="${session == null}">

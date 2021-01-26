@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fr.ul.miage.m2.sid</groupId>
-	<artifactId>plateforme-cours</artifactId>
+	<artifactId>plateforme-cours-users</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Plateforme Cours</name>
 	<description>Projet API REST Plateforme de cours/formations</description>

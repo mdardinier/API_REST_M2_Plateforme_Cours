@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Acheter un cours</title>
+<title>Projet API REST - Utilisateur</title>
 </head>
 <body>
 	<c:if test="${accesRefuse == null && contenuDejaAchete == null}">

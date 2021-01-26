@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Cours</title>
+<title>Projet API REST - Utilisateur</title>
 </head>
 <body>
 	<h1>Titre du cours : ${titre}</h1>

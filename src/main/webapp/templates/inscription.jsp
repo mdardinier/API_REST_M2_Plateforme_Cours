@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Inscription</title>
+<title>Projet API REST - Utilisateur</title>
 </head>
 <body>
 	<p>Page de formulaire d'inscription</p>

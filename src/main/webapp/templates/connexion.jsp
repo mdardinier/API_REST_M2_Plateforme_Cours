@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Connexion</title>
+<title>Projet API REST - Utilisateur</title>
 </head>
 <body>
 	<form method="post" action="connexion/check">
